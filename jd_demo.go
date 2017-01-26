@@ -124,6 +124,11 @@ func (t *SimpleChaincode) createAssert(stub shim.ChaincodeStubInterface, args []
 		return nil,errors.New("Error retrieving assertBytes")
 	}
 
+	err = stub.SetEvent("AssertCreated", []byte(schoolBytes))
+	if err != nil {
+		return nil, err
+	}
+
 	return schoolBytes,nil
 }
 
