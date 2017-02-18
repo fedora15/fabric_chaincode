@@ -59,18 +59,18 @@ type Record struct{
 
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	//function, args := stub.GetFunctionAndParameters()
-	if function == "createSchool"{
-		return t.createSchool(stub,args)
-	}else if function == "createStudent"{
-		return t.createStudent(stub,args)
-	}
+	fmt.Printf("deploy code success and do nothing")
 	return nil, nil
 }
 
 //func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface) ([]byte, error) {
 	//function, args := stub.GetFunctionAndParameters()
 func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
-	if function == "enrollStudent"{
+	if function == "createSchool"{
+		return t.createSchool(stub,args)
+	}else if function == "createStudent"{
+		return t.createStudent(stub,args)
+	}else if function == "enrollStudent"{
 		if len(args)!= 3{
 			return nil, errors.New("Incorrect number of arguments. Expecting 1")
 		}
