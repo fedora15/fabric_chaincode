@@ -187,7 +187,10 @@ func (t *SimpleChaincode) createSchool(stub shim.ChaincodeStubInterface, args []
 	if err!= nil{
 		return nil,errors.New("Error retrieving schoolBytes")
 	}
-
+	err = stub.SetEvent("schoolCreated", school.Address)
+	if err != nil {
+		return nil, err
+	}
 
 	return schoolBytes,nil
 }
@@ -212,6 +215,10 @@ func (t *SimpleChaincode) createStudent(stub shim.ChaincodeStubInterface, args [
 	studentBytes,err = json.Marshal(&student)
 	if err!= nil{
 		return nil,errors.New("Error retrieving schoolBytes")
+	}
+	err = stub.SetEvent("studentCreated", student.Address)
+	if err != nil {
+		return nil, err
 	}
 
 	return studentBytes,nil
