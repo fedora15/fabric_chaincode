@@ -261,6 +261,10 @@ func (t *SimpleChaincode) enrollStudent(stub shim.ChaincodeStubInterface, args [
 	if err!= nil{
 		return nil,errors.New("Error retrieving schoolBytes")
 	}
+	err = stub.SetEvent("enrollStudent", recordBytes)
+	if err != nil {
+		return nil, err
+	}
 
 	return recordBytes,nil
 }
@@ -306,6 +310,11 @@ func (t *SimpleChaincode) updateDiploma(stub shim.ChaincodeStubInterface, args [
 	err = writeSchool(stub,school)
 	if err != nil{
 		return nil,errors.New("Error write data")
+	}
+
+	err = stub.SetEvent("updateDiploma", recordBytes)
+	if err != nil {
+		return nil, err
 	}
 
 	return recordBytes,nil
